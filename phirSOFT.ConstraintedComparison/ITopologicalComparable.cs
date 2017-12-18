@@ -10,7 +10,7 @@ namespace phirSOFT.ConstraintedComparison
     /// <remarks>
     /// It is assumed that <b>if</b> one instance can compare against an other and the other can compare against the first, that both comparisons will induct the same order.
     /// </remarks>
-    public interface IConstraintedComparable<T> : IComparable<T>
+    public interface ITopologicalComparable<in T> : IComparable<T>
     {
         /// <summary>
         /// Determines wheter this instance can compare against <paramref name="other"/>.
