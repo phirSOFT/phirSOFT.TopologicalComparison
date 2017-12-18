@@ -1,7 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard1.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		
+		<TargetFramework>netstandard1.0</TargetFramework>
+		<Description>Interfaces for topologic sortable types.</Description>
+		<IncludeBuildOutput>true</IncludeBuildOutput>
+		<IncludeSymbols>true</IncludeSymbols>
+	</PropertyGroup>
 
 </Project>
