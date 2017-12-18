@@ -144,6 +144,7 @@ namespace phirSOFT.ConstraintedComparisonTests
         }
 
         [TestMethod]
+        [Ignore]
         public void CircleTest()
         {
             CircleTest(5);
