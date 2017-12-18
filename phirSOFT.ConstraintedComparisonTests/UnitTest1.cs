@@ -125,22 +125,22 @@ namespace phirSOFT.ConstraintedComparisonTests
                 sorted.Insert(item);
             }
 
-            Assert.IsTrue(sorted.IndexOf(1) < sorted.IndexOf(4));
-            Assert.IsTrue(sorted.IndexOf(1) < sorted.IndexOf(9));
-
-            Assert.IsTrue(sorted.IndexOf(2) < sorted.IndexOf(5));
-            Assert.IsTrue(sorted.IndexOf(2) < sorted.IndexOf(6));
-
-            Assert.IsTrue(sorted.IndexOf(3) < sorted.IndexOf(6));
-            Assert.IsTrue(sorted.IndexOf(3) < sorted.IndexOf(7));
-
-            Assert.IsTrue(sorted.IndexOf(5) < sorted.IndexOf(6));
-            Assert.IsTrue(sorted.IndexOf(5) < sorted.IndexOf(7));
-
-            Assert.IsTrue(sorted.IndexOf(6) < sorted.IndexOf(8));
-            Assert.IsTrue(sorted.IndexOf(6) < sorted.IndexOf(9));
-
-            Assert.IsTrue(sorted.IndexOf(8) < sorted.IndexOf(9));
+            Assert.IsTrue(sorted.IndexOf(1) < sorted.IndexOf(4),"p(1) < p(4)");
+            Assert.IsTrue(sorted.IndexOf(1) < sorted.IndexOf(9),"p(1) < p(9)");
+                                                             
+            Assert.IsTrue(sorted.IndexOf(2) < sorted.IndexOf(5),"p(2) < p(5)");
+            Assert.IsTrue(sorted.IndexOf(2) < sorted.IndexOf(6),"p(2) < p(6)");
+                                                              
+            Assert.IsTrue(sorted.IndexOf(3) < sorted.IndexOf(6),"p(3) < p(6)");
+            Assert.IsTrue(sorted.IndexOf(3) < sorted.IndexOf(7),"p(3) < p(7)");
+                                                            
+            Assert.IsTrue(sorted.IndexOf(5) < sorted.IndexOf(6),"p(5) < p(6)");
+            Assert.IsTrue(sorted.IndexOf(5) < sorted.IndexOf(7),"p(5) < p(7)");
+                                                              
+            Assert.IsTrue(sorted.IndexOf(6) < sorted.IndexOf(8),"p(6) < p(8)");
+            Assert.IsTrue(sorted.IndexOf(6) < sorted.IndexOf(9),"p(6) < p(9)");
+                                                              
+            Assert.IsTrue(sorted.IndexOf(8) < sorted.IndexOf(9),"p(8) < p(9)");
         }
 
         [TestMethod]
