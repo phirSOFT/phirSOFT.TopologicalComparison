@@ -37,7 +37,7 @@ namespace phirSOFT.TopologicalComparison
         {
             var index = 0;
             var enumerator = list.GetEnumerator();
-            while (enumerator.MoveNext() && !comparer.CanCompare(enumerator.Current, item) || comparer.Compare(enumerator.Current, item) <= 0)
+            while (enumerator.MoveNext() && (!comparer.CanCompare(enumerator.Current, item) || comparer.Compare(enumerator.Current, item) <= 0))
                 index++;
 
 
