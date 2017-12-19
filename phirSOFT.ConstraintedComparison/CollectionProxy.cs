@@ -25,7 +25,7 @@ namespace phirSOFT.ConstraintedComparison
                 if (!comparer.CanCompare(x, item) || comparer.Compare(x, item) >= 0) continue;
 
                 list.RemoveAt(i);
-                list.Insert(index, x);
+                list.Insert(index++, x);
             }
         }
     }

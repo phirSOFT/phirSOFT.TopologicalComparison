@@ -6,6 +6,7 @@
 		<Description>Interfaces for topologic sortable types.</Description>
 		<IncludeBuildOutput>true</IncludeBuildOutput>
 		<IncludeSymbols>true</IncludeSymbols>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 </Project>

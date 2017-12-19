@@ -206,6 +206,36 @@ namespace phirSOFT.ConstraintedComparisonTests
             Assert.AreEqual(3, l.IndexOf(9));
         }
 
+        [TestMethod]
+        public void TestInsertion02()
+        {
+            ((AbsoluteTopological<int>)1).Before(4);
+            ((AbsoluteTopological<int>)1).Before(9);
+
+            ((AbsoluteTopological<int>)2).Before(5);
+            ((AbsoluteTopological<int>)2).Before(6);
+
+            ((AbsoluteTopological<int>)3).Before(6);
+            ((AbsoluteTopological<int>)3).Before(7);
+
+            ((AbsoluteTopological<int>)5).Before(6);
+            ((AbsoluteTopological<int>)5).Before(7);
+
+            ((AbsoluteTopological<int>)6).Before(8);
+            ((AbsoluteTopological<int>)6).Before(9);
+
+            ((AbsoluteTopological<int>)8).Before(9);
+
+            var l = new List<AbsoluteTopological<int>>()
+            {
+               1, 8, 3,2 , 5
+            };
+            l.Insert(6);
+
+            Assert.AreEqual(0, l.IndexOf(1));
+            
+        }
+
         private class Circle : ITopologicalComparable<Circle>
         {
             public readonly int m;
