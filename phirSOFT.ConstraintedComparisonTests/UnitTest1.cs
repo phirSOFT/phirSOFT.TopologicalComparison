@@ -3,8 +3,10 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using phirSOFT.ConstraintedComparison;
+using static System.String;
 
 namespace phirSOFT.ConstraintedComparisonTests
 {
@@ -75,7 +77,7 @@ namespace phirSOFT.ConstraintedComparisonTests
             var sorted = new List<AbsoluteTopological<int>>();
             foreach (var z in s)
             {
-               sorted.Insert(z);
+                sorted.Insert(z);
             }
         }
 
@@ -95,26 +97,29 @@ namespace phirSOFT.ConstraintedComparisonTests
                 9
             };
 
-            ((AbsoluteTopological<int>) 1).Before(4);
-            ((AbsoluteTopological<int>) 1).Before(9);
+            ((AbsoluteTopological<int>)1).Before(4);
+            ((AbsoluteTopological<int>)1).Before(9);
 
-            ((AbsoluteTopological<int>) 2).Before(5);
-            ((AbsoluteTopological<int>) 2).Before(6);
+            ((AbsoluteTopological<int>)2).Before(5);
+            ((AbsoluteTopological<int>)2).Before(6);
 
-            ((AbsoluteTopological<int>) 3).Before(6);
-            ((AbsoluteTopological<int>) 3).Before(7);
+            ((AbsoluteTopological<int>)3).Before(6);
+            ((AbsoluteTopological<int>)3).Before(7);
 
-            ((AbsoluteTopological<int>) 5).Before(6);
-            ((AbsoluteTopological<int>) 5).Before(7);
+            ((AbsoluteTopological<int>)5).Before(6);
+            ((AbsoluteTopological<int>)5).Before(7);
 
-            ((AbsoluteTopological<int>) 6).Before(8);
-            ((AbsoluteTopological<int>) 6).Before(9);
+            ((AbsoluteTopological<int>)6).Before(8);
+            ((AbsoluteTopological<int>)6).Before(9);
 
-            ((AbsoluteTopological<int>) 8).Before(9);
+            ((AbsoluteTopological<int>)8).Before(9);
 
             var rnd = new Random();
 
             var sorted = new List<AbsoluteTopological<int>>();
+            var insertOrder = new List<int>();
+
+            var report = new StringBuilder();
 
             while (list.Count > 0)
             {
@@ -123,24 +128,28 @@ namespace phirSOFT.ConstraintedComparisonTests
                 list.RemoveAt(index);
 
                 sorted.Insert(item);
+                insertOrder.Add(item);
+
+
+                report.AppendFormat(" -- >> {{{0}}}\n", Join(", ", sorted));
             }
 
-            Assert.IsTrue(sorted.IndexOf(1) < sorted.IndexOf(4),"p(1) < p(4)");
-            Assert.IsTrue(sorted.IndexOf(1) < sorted.IndexOf(9),"p(1) < p(9)");
-                                                             
-            Assert.IsTrue(sorted.IndexOf(2) < sorted.IndexOf(5),"p(2) < p(5)");
-            Assert.IsTrue(sorted.IndexOf(2) < sorted.IndexOf(6),"p(2) < p(6)");
-                                                              
-            Assert.IsTrue(sorted.IndexOf(3) < sorted.IndexOf(6),"p(3) < p(6)");
-            Assert.IsTrue(sorted.IndexOf(3) < sorted.IndexOf(7),"p(3) < p(7)");
-                                                            
-            Assert.IsTrue(sorted.IndexOf(5) < sorted.IndexOf(6),"p(5) < p(6)");
-            Assert.IsTrue(sorted.IndexOf(5) < sorted.IndexOf(7),"p(5) < p(7)");
-                                                              
-            Assert.IsTrue(sorted.IndexOf(6) < sorted.IndexOf(8),"p(6) < p(8)");
-            Assert.IsTrue(sorted.IndexOf(6) < sorted.IndexOf(9),"p(6) < p(9)");
-                                                              
-            Assert.IsTrue(sorted.IndexOf(8) < sorted.IndexOf(9),"p(8) < p(9)");
+            Assert.IsTrue(sorted.IndexOf(1) < sorted.IndexOf(4), "p(1) < p(4)\n -- p(1) = {0}, p(4) = {1}\n -- List Dump = {2}\n -- Insert Order = {3}\n --- Insertion Log ---\n{4}", sorted.IndexOf(1), sorted.IndexOf(4), "{" + Join(", ", sorted) + "}", "{" + Join(", ", insertOrder) + "}", report);
+            Assert.IsTrue(sorted.IndexOf(1) < sorted.IndexOf(9), "p(1) < p(9)\n -- p(1) = {0}, p(9) = {1}\n -- List Dump = {2}\n -- Insert Order = {3}\n --- Insertion Log ---\n{4}", sorted.IndexOf(1), sorted.IndexOf(9), "{" + Join(", ", sorted) + "}", "{" + Join(", ", insertOrder) + "}", report);
+
+            Assert.IsTrue(sorted.IndexOf(2) < sorted.IndexOf(5), "p(2) < p(5)\n -- p(2) = {0}, p(5) = {1}\n -- List Dump = {2}\n -- Insert Order = {3}\n --- Insertion Log ---\n{4}", sorted.IndexOf(2), sorted.IndexOf(5), "{" + Join(", ", sorted) + "}", "{" + Join(", ", insertOrder) + "}", report);
+            Assert.IsTrue(sorted.IndexOf(2) < sorted.IndexOf(6), "p(2) < p(6)\n -- p(2) = {0}, p(6) = {1}\n -- List Dump = {2}\n -- Insert Order = {3}\n --- Insertion Log ---\n{4}", sorted.IndexOf(2), sorted.IndexOf(6), "{" + Join(", ", sorted) + "}", "{" + Join(", ", insertOrder) + "}", report);
+
+            Assert.IsTrue(sorted.IndexOf(3) < sorted.IndexOf(6), "p(3) < p(6)\n -- p(3) = {0}, p(6) = {1}\n -- List Dump = {2}\n -- Insert Order = {3}\n --- Insertion Log ---\n{4}", sorted.IndexOf(3), sorted.IndexOf(6), "{" + Join(", ", sorted) + "}", "{" + Join(", ", insertOrder) + "}", report);
+            Assert.IsTrue(sorted.IndexOf(3) < sorted.IndexOf(7), "p(3) < p(7)\n -- p(3) = {0}, p(7) = {1}\n -- List Dump = {2}\n -- Insert Order = {3}\n --- Insertion Log ---\n{4}", sorted.IndexOf(3), sorted.IndexOf(7), "{" + Join(", ", sorted) + "}", "{" + Join(", ", insertOrder) + "}", report);
+
+            Assert.IsTrue(sorted.IndexOf(5) < sorted.IndexOf(6), "p(5) < p(6)\n -- p(5) = {0}, p(6) = {1}\n -- List Dump = {2}\n -- Insert Order = {3}\n --- Insertion Log ---\n{4}", sorted.IndexOf(5), sorted.IndexOf(6), "{" + Join(", ", sorted) + "}", "{" + Join(", ", insertOrder) + "}", report);
+            Assert.IsTrue(sorted.IndexOf(5) < sorted.IndexOf(7), "p(5) < p(7)\n -- p(5) = {0}, p(7) = {1}\n -- List Dump = {2}\n -- Insert Order = {3}\n --- Insertion Log ---\n{4}", sorted.IndexOf(5), sorted.IndexOf(7), "{" + Join(", ", sorted) + "}", "{" + Join(", ", insertOrder) + "}", report);
+
+            Assert.IsTrue(sorted.IndexOf(6) < sorted.IndexOf(8), "p(6) < p(8)\n -- p(6) = {0}, p(8) = {1}\n -- List Dump = {2}\n -- Insert Order = {3}\n --- Insertion Log ---\n{4}", sorted.IndexOf(6), sorted.IndexOf(8), "{" + Join(", ", sorted) + "}", "{" + Join(", ", insertOrder) + "}", report);
+            Assert.IsTrue(sorted.IndexOf(6) < sorted.IndexOf(9), "p(6) < p(9)\n -- p(6) = {0}, p(9) = {1}\n -- List Dump = {2}\n -- Insert Order = {3}\n --- Insertion Log ---\n{4}", sorted.IndexOf(6), sorted.IndexOf(9), "{" + Join(", ", sorted) + "}", "{" + Join(", ", insertOrder) + "}", report);
+
+            Assert.IsTrue(sorted.IndexOf(8) < sorted.IndexOf(9), "p(8) < p(9)\n -- p(8) = {0}, p(9) = {1}\n -- List Dump = {2}\n -- Insert Order = {3}\n --- Insertion Log ---\n{4}", sorted.IndexOf(8), sorted.IndexOf(9), "{" + Join(", ", sorted) + "}", "{" + Join(", ", insertOrder) + "}", report);
         }
 
         [TestMethod]
@@ -151,16 +160,50 @@ namespace phirSOFT.ConstraintedComparisonTests
             CircleTest(11);
         }
         public void CircleTest(int m)
-        {      
+        {
             var list = new List<Circle>();
 
             for (var i = 0; i < m; i++)
             {
-                list.Insert(new Circle((3*i) % m,m));
+                list.Insert(new Circle((3 * i) % m, m));
             }
 
-            CollectionAssert.AreEqual(Enumerable.Range(0,m).ToList(), list.Select(i => i.m).ToList());
+            CollectionAssert.AreEqual(Enumerable.Range(0, m).ToList(), list.Select(i => i.m).ToList());
 
+        }
+
+        [TestMethod]
+        public void TestInsertion01()
+        {
+            ((AbsoluteTopological<int>)1).Before(4);
+            ((AbsoluteTopological<int>)1).Before(9);
+
+            ((AbsoluteTopological<int>)2).Before(5);
+            ((AbsoluteTopological<int>)2).Before(6);
+
+            ((AbsoluteTopological<int>)3).Before(6);
+            ((AbsoluteTopological<int>)3).Before(7);
+
+            ((AbsoluteTopological<int>)5).Before(6);
+            ((AbsoluteTopological<int>)5).Before(7);
+
+            ((AbsoluteTopological<int>)6).Before(8);
+            ((AbsoluteTopological<int>)6).Before(9);
+
+            ((AbsoluteTopological<int>)8).Before(9);
+
+            var l = new List<AbsoluteTopological<int>>()
+            {
+                2,
+                9,
+                5
+            };
+            l.Insert(6);
+
+            Assert.AreEqual(0, l.IndexOf(2));
+            Assert.AreEqual(1, l.IndexOf(5));
+            Assert.AreEqual(2, l.IndexOf(6));
+            Assert.AreEqual(3, l.IndexOf(9));
         }
 
         private class Circle : ITopologicalComparable<Circle>
@@ -176,7 +219,7 @@ namespace phirSOFT.ConstraintedComparisonTests
 
             public int CompareTo(Circle other)
             {
-                var tmp =  m - other.m;
+                var tmp = m - other.m;
                 if (tmp < 0)
                     tmp += mod;
 
