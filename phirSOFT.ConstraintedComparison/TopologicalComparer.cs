@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace phirSOFT.ConstraintedComparison
+namespace phirSOFT.TopologicalComparison
 {
     public abstract class TopologicalComparer<T> : ITopologicalComparer<T>
     {
@@ -51,11 +52,39 @@ namespace phirSOFT.ConstraintedComparison
                     return (TopologicalComparer<T>)Activator.CreateInstance(typeof(TopologicalGenericComparer<>).MakeGenericType(t.AsType()));
                 }
             }
-            
+
             throw new ArgumentException($"{t.Name} is not constrainted comparable.");
         }
 
         public abstract int Compare(T x, T y);
         public abstract bool CanCompare(T x, T y);
+    }
+
+    public sealed class TopologicalComparer : ITopologicalComparer
+    {
+        public static TopologicalComparer Default => new TopologicalComparer();
+
+        public int Compare(object x, object y)
+        {
+            if (x == y) return 0;
+            if (x == null) return -1;
+            if (y == null) return 1;
+
+            // Todo: Check for ITopologicalComparable<T> here
+
+            if (x is ITopologicalComparable ia)
+                return ia.CompareTo(y);
+
+            if (y is ITopologicalComparable ib)
+                return -ib.CompareTo(x);
+
+            throw new ArgumentException();
+        }
+
+        public bool CanCompare(object x, object y) => x == y
+                                                      || x == null 
+                                                      || y == null
+                                                      || x is ITopologicalComparable ia && ia.CanCompareTo(y) 
+                                                      || y is ITopologicalComparable ib && ib.CanCompareTo(x);
     }
 }

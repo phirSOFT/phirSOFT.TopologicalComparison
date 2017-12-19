@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
-namespace phirSOFT.ConstraintedComparison
+namespace phirSOFT.TopologicalComparison
 {
     /// <inheritdoc />
     /// <summary>
@@ -10,5 +11,10 @@ namespace phirSOFT.ConstraintedComparison
     public interface ITopologicalComparer<in T> : IComparer<T>
     {
         bool CanCompare(T x, T y);
+    }
+
+    public interface ITopologicalComparer : IComparer
+    {
+        bool CanCompare(object x, object y);
     }
 }

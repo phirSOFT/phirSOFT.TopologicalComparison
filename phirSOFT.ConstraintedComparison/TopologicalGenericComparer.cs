@@ -1,4 +1,4 @@
-﻿namespace phirSOFT.ConstraintedComparison
+﻿namespace phirSOFT.TopologicalComparison
 {
     internal class TopologicalGenericComparer<T> : TopologicalComparer<T> where T : ITopologicalComparable<T>
     {

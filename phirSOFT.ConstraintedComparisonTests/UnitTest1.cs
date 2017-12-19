@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using phirSOFT.ConstraintedComparison;
+using phirSOFT.TopologicalComparison;
 using static System.String;
 
 namespace phirSOFT.ConstraintedComparisonTests

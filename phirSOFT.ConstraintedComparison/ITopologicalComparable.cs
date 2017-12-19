@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace phirSOFT.ConstraintedComparison
+namespace phirSOFT.TopologicalComparison
 {
     /// <summary>
     /// An interface for types types that implement <see cref="IComparable{T}"/>, but not all instances can compare against each other.
@@ -18,5 +16,10 @@ namespace phirSOFT.ConstraintedComparison
         /// <param name="other">The instance to compare against</param>
         /// <returns>True, if the call to <see cref="IComparable{T}.CompareTo(T)"/> is save.</returns>
         bool CanCompareTo(T other);
+    }
+
+    public interface ITopologicalComparable : IComparable
+    {
+        bool CanCompareTo(object other);
     }
 }

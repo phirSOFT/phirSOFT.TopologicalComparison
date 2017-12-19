@@ -1,4 +1,4 @@
-﻿namespace phirSOFT.ConstraintedComparison
+﻿namespace phirSOFT.TopologicalComparison
 {
     internal class TopologicalNullableComparer<T> : TopologicalComparer<T?> where T : struct, ITopologicalComparable<T>
     {

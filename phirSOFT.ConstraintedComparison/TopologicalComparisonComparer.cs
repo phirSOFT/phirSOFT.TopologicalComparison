@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace phirSOFT.ConstraintedComparison
+namespace phirSOFT.TopologicalComparison
 {
     internal class TopologicalComparisonComparer<T> : TopologicalComparer<T>
     {

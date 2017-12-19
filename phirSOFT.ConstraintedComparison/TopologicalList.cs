@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 
-namespace phirSOFT.ConstraintedComparison
+namespace phirSOFT.TopologicalComparison
 {
     public class TopologicalList<T> : IList<T>
     {
