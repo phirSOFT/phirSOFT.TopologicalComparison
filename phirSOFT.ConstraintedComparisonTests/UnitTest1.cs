@@ -14,7 +14,7 @@ namespace phirSOFT.ConstraintedComparisonTests
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void BehaviourTest01()
         {
             var s = new List<AbsoluteTopological<int>>();
 
