@@ -4,8 +4,8 @@ namespace phirSOFT.TopologicalComparison
 {
     internal class TopologicalComparisonComparer<T> : TopologicalComparer<T>
     {
-        private readonly Comparison<T> _comparison;
         private readonly Func<T, T, bool> _canCompare;
+        private readonly Comparison<T> _comparison;
 
         public TopologicalComparisonComparer(Comparison<T> comparison)
         {

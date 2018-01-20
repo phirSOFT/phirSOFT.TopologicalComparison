@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Reflection;
 
 namespace phirSOFT.TopologicalComparison
@@ -24,6 +22,9 @@ namespace phirSOFT.TopologicalComparison
             }
         }
 
+        public abstract int Compare(T x, T y);
+        public abstract bool CanCompare(T x, T y);
+
         public static TopologicalComparer<T> Create(Comparison<T> comparison)
         {
             return new TopologicalComparisonComparer<T>(comparison);
@@ -39,25 +40,19 @@ namespace phirSOFT.TopologicalComparison
             var t = typeof(T).GetTypeInfo();
 
             if (typeof(ITopologicalComparable<T>).GetTypeInfo().IsAssignableFrom(t))
-            {
-                return (TopologicalComparer<T>)Activator.CreateInstance(typeof(TopologicalGenericComparer<>).MakeGenericType(t.AsType()));
-            }
+                return (TopologicalComparer<T>) Activator.CreateInstance(
+                    typeof(TopologicalGenericComparer<>).MakeGenericType(t.AsType()));
 
             // If T is a Nullable<U> where U implements IComparable<U> return a NullableComparer<U>
-            if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>))
-            {
-                var u = t.GenericTypeArguments[0].GetTypeInfo();
-                if (typeof(ITopologicalComparable<>).MakeGenericType(u.AsType()).GetTypeInfo().IsAssignableFrom(u))
-                {
-                    return (TopologicalComparer<T>)Activator.CreateInstance(typeof(TopologicalGenericComparer<>).MakeGenericType(t.AsType()));
-                }
-            }
+            if (!t.IsGenericType || t.GetGenericTypeDefinition() != typeof(Nullable<>))
+                throw new ArgumentException($"{t.Name} is not constrainted comparable.");
+            var u = t.GenericTypeArguments[0].GetTypeInfo();
+            if (typeof(ITopologicalComparable<>).MakeGenericType(u.AsType()).GetTypeInfo().IsAssignableFrom(u))
+                return (TopologicalComparer<T>) Activator.CreateInstance(
+                    typeof(TopologicalGenericComparer<>).MakeGenericType(t.AsType()));
 
             throw new ArgumentException($"{t.Name} is not constrainted comparable.");
         }
-
-        public abstract int Compare(T x, T y);
-        public abstract bool CanCompare(T x, T y);
     }
 
     public sealed class TopologicalComparer : ITopologicalComparer
@@ -81,10 +76,13 @@ namespace phirSOFT.TopologicalComparison
             throw new ArgumentException();
         }
 
-        public bool CanCompare(object x, object y) => x == y
-                                                      || x == null 
-                                                      || y == null
-                                                      || x is ITopologicalComparable ia && ia.CanCompareTo(y) 
-                                                      || y is ITopologicalComparable ib && ib.CanCompareTo(x);
+        public bool CanCompare(object x, object y)
+        {
+            return x == y
+                   || x == null
+                   || y == null
+                   || x is ITopologicalComparable ia && ia.CanCompareTo(y)
+                   || y is ITopologicalComparable ib && ib.CanCompareTo(x);
+        }
     }
 }

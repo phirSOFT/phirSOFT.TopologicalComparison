@@ -8,7 +8,7 @@
                 return 0;
 
 
-            return Compare((T)x,(T)y);
+            return Compare((T) x, (T) y);
         }
 
         private static int Compare(T x, T y)
@@ -24,7 +24,7 @@
             if (!(x.HasValue && y.HasValue))
                 return false;
 
-            return x.Value.CanCompareTo(y.Value) || (y.Value.CanCompareTo(x.Value));
+            return x.Value.CanCompareTo(y.Value) || y.Value.CanCompareTo(x.Value);
         }
 
         // Equals method for the comparer itself. 

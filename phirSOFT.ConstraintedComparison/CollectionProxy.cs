@@ -13,8 +13,8 @@ namespace phirSOFT.TopologicalComparison
 
         public static void Insert<T>(this IList<T> list, T item, ITopologicalComparer<T> comparer)
         {
-
-            var index = list.TakeWhile(currentItem => !comparer.CanCompare(currentItem, item) || comparer.Compare(currentItem, item) <= 0).Count();
+            var index = list.TakeWhile(currentItem =>
+                !comparer.CanCompare(currentItem, item) || comparer.Compare(currentItem, item) <= 0).Count();
 
             list.Insert(index, item);
 
@@ -30,14 +30,14 @@ namespace phirSOFT.TopologicalComparison
 
         public static void Insert(this IList list, object item)
         {
-
         }
 
         public static void Insert(this IList list, object item, ITopologicalComparer comparer)
         {
             var index = 0;
             var enumerator = list.GetEnumerator();
-            while (enumerator.MoveNext() && (!comparer.CanCompare(enumerator.Current, item) || comparer.Compare(enumerator.Current, item) <= 0))
+            while (enumerator.MoveNext() && (!comparer.CanCompare(enumerator.Current, item) ||
+                                             comparer.Compare(enumerator.Current, item) <= 0))
                 index++;
 
 
