@@ -4,7 +4,8 @@ namespace phirSOFT.TopologicalComparison
 {
     /// <inheritdoc />
     /// <summary>
-    ///     An interface for types types that implement <see cref="T:System.IComparable`1" />, but not all instances can compare
+    ///     An interface for types types that implement <see cref="T:System.IComparable`1" />, but not all instances can
+    ///     compare
     ///     against each other.
     /// </summary>
     /// <remarks>

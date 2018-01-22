@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace phirSOFT.TopologicalComparison
@@ -51,7 +52,15 @@ namespace phirSOFT.TopologicalComparison
                 return (TopologicalComparer<T>) Activator.CreateInstance(
                     typeof(TopologicalGenericComparer<>).MakeGenericType(t.AsType()));
 
-            throw new ArgumentException($"{t.Name} is not constrainted comparable.");
+            try
+            {
+                var comparer = Comparer<T>.Default;
+                return new TopologicalComparisonComparer<T>((x, y) => comparer.Compare(x, y));
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException($"{t.Name} is not constrainted comparable.", e);
+            }
         }
     }
 
@@ -67,11 +76,12 @@ namespace phirSOFT.TopologicalComparison
 
             // Todo: Check for ITopologicalComparable<T> here
 
-            if (x is ITopologicalComparable ia)
+            if (x is IComparable ia)
                 return ia.CompareTo(y);
 
-            if (y is ITopologicalComparable ib)
+            if (y is IComparable ib)
                 return -ib.CompareTo(x);
+
 
             throw new ArgumentException();
         }
@@ -82,7 +92,9 @@ namespace phirSOFT.TopologicalComparison
                    || x == null
                    || y == null
                    || x is ITopologicalComparable ia && ia.CanCompareTo(y)
-                   || y is ITopologicalComparable ib && ib.CanCompareTo(x);
+                   || y is ITopologicalComparable ib && ib.CanCompareTo(x)
+                   || x is IComparable
+                   || y is IComparable;
         }
     }
 }

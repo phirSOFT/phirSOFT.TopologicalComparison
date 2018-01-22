@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace phirSOFT.TopologicalComparison
 {
@@ -8,8 +7,7 @@ namespace phirSOFT.TopologicalComparison
         T Value { get; set; }
         IEnumerable<ITreeNode<T>> Children { get; }
         ITreeNode<T> AddChild(T node);
-        ITreeNode<T> Insert(T node, IEnumerable<ITreeNode<T>> sucessors);
-        ITreeNode<T> Insert(T node, Predicate<ITreeNode<T>> sucessors);
-        ITreeNode<T> MoveChild(ITreeNode<T> child, ITreeNode<T> newParent);
+        void Detach(ITreeNode<T> child);
+        void Attach(ITreeNode<T> child);
     }
 }

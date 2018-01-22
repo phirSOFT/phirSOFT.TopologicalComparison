@@ -28,8 +28,32 @@ namespace phirSOFT.TopologicalComparison
             }
         }
 
+        public static void Insert<T>(this LinkedList<T> list, T item, ITopologicalComparer<T> comparer)
+        {
+            var currentItem = list.First;
+
+            while (currentItem != null &&
+                   (!comparer.TryCompare(currentItem.Value, item, out var result) || result <= 0))
+                currentItem = currentItem.Next;
+
+
+            var inserted = currentItem != null ? list.AddAfter(currentItem, item) : list.AddLast(item);
+
+            for (currentItem = inserted.Next; currentItem != null; currentItem = currentItem?.Next)
+            {
+                if (!comparer.CanCompare(currentItem.Value, item) ||
+                    comparer.Compare(currentItem.Value, item) >= 0) continue;
+
+                var toBeMoved = currentItem;
+                currentItem = currentItem.Next;
+                list.Remove(toBeMoved);
+                list.AddBefore(inserted, toBeMoved);
+            }
+        }
+
         public static void Insert(this IList list, object item)
         {
+            Insert(list, item, TopologicalComparer.Default);
         }
 
         public static void Insert(this IList list, object item, ITopologicalComparer comparer)
