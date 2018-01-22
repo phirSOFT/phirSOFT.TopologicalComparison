@@ -36,6 +36,11 @@ namespace phirSOFT.TopologicalComparison
             return new TopologicalComparisonComparer<T>(comparison, canCompare);
         }
 
+        public static TopologicalComparer<T> Create(IComparer<T> comparer)
+        {
+            return Create(comparer.Compare, (x, y) => true);
+        }
+
         private static TopologicalComparer<T> CreateComparer()
         {
             var t = typeof(T).GetTypeInfo();
@@ -55,7 +60,7 @@ namespace phirSOFT.TopologicalComparison
             try
             {
                 var comparer = Comparer<T>.Default;
-                return new TopologicalComparisonComparer<T>((x, y) => comparer.Compare(x, y));
+                return Create(comparer);
             }
             catch (Exception e)
             {
