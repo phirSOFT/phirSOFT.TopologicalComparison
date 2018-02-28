@@ -52,7 +52,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbsoluteTopological.cs" />
     <Compile Include="AlphabetGenerator.cs" />
+    <Compile Include="Circle.cs" />
     <Compile Include="EnvironmentComparer.cs" />
     <Compile Include="RandomEnumerator.cs" />
     <Compile Include="TreeComparer.cs" />
