@@ -39,18 +39,42 @@ namespace phirSOFT.TopologicalComparison
             var result = 0;
             var index = list.TakeWhile(currentItem => !comparer.TryCompare(currentItem, item, out result) || result <= 0).Count();
 
+            int offset;
             if (result < 0)
+            {
                 list.Insert(index, item);
+                offset = 2;
+            }
             else
+            {
                 list[index] = resolveConflicts(list[index], item);
+                offset = 1;
+            }
 
-            for (var i = index + 2; i < list.Count; i++)
+
+            for (var i = index + offset; i < list.Count; i++)
             {
                 var x = list[i];
-                if (!comparer.CanCompare(x, item) || comparer.Compare(x, item) >= 0) continue;
+                if (!comparer.TryCompare(x, item, out result))
+                    continue;
 
-                list.RemoveAt(i);
-                list.Insert(index++, x);
+                
+                switch (Math.Sign(result))
+                {
+                    case -1:
+                        list.RemoveAt(i);
+                        list.Insert(index++, x);
+                        break;
+                    case 0:
+                        list[index] = resolveConflicts(list[index], x);
+                        list.RemoveAt(i);
+                        break;
+                    case 1:
+                        continue;
+                }
+               
+
+                
             }
         }
 

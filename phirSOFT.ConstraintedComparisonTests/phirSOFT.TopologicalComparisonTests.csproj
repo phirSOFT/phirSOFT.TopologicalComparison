@@ -57,6 +57,7 @@
     <Compile Include="Circle.cs" />
     <Compile Include="EnvironmentComparer.cs" />
     <Compile Include="RandomEnumerator.cs" />
+    <Compile Include="TopologicalComparerTest.cs" />
     <Compile Include="TreeComparer.cs" />
     <Compile Include="TreeComparerTest.cs" />
     <Compile Include="TreeTest.cs" />

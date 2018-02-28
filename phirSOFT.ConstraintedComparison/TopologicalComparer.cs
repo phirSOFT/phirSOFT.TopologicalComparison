@@ -45,28 +45,39 @@ namespace phirSOFT.TopologicalComparison
         {
             var t = typeof(T).GetTypeInfo();
 
-            if (typeof(ITopologicalComparable<T>).GetTypeInfo().IsAssignableFrom(t))
-                return (TopologicalComparer<T>) Activator.CreateInstance(
-                    typeof(TopologicalGenericComparer<>).MakeGenericType(t.AsType()));
+            return (TopologicalComparer<T>) CreateComparer(t);
+        }
 
-            // If T is a Nullable<U> where U implements IComparable<U> return a NullableComparer<U>
-            if (!t.IsGenericType || t.GetGenericTypeDefinition() != typeof(Nullable<>))
-                throw new ArgumentException($"{t.Name} is not constrainted comparable.");
-            var u = t.GenericTypeArguments[0].GetTypeInfo();
-            if (typeof(ITopologicalComparable<>).MakeGenericType(u.AsType()).GetTypeInfo().IsAssignableFrom(u))
-                return (TopologicalComparer<T>) Activator.CreateInstance(
-                    typeof(TopologicalGenericComparer<>).MakeGenericType(t.AsType()));
+        private static object CreateComparer(TypeInfo type)
+        {
+           
+            if (IsTopologicalComparableType(type))
+                return  Activator.CreateInstance(typeof(TopologicalGenericComparer<>).MakeGenericType(type.AsType()));;
+
+            if (type.IsGenericType && type.GetGenericTypeDefinition() != typeof(Nullable<>))
+            {
+                var u = type.GenericTypeArguments[0].GetTypeInfo();
+                if (IsTopologicalComparableType(u))
+                    return Activator.CreateInstance(typeof(TopologicalNullableComparer<>).MakeGenericType(u.GetType()));
+            }
 
             try
             {
-                var comparer = Comparer<T>.Default;
+                var comparer = Comparer<T>.Default;              
                 return Create(comparer);
             }
             catch (Exception e)
             {
-                throw new ArgumentException($"{t.Name} is not constrainted comparable.", e);
+                throw new ArgumentException($"{type.Name} is not constrainted comparable.", e);
             }
         }
+
+        private static bool IsTopologicalComparableType(TypeInfo type)
+        {
+            return typeof(ITopologicalComparable<>).MakeGenericType(type.GetType()).GetTypeInfo()
+                .IsAssignableFrom(type);            
+        }
+
     }
 
     public sealed class TopologicalComparer : ITopologicalComparer
