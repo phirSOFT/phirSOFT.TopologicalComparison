@@ -14,7 +14,7 @@ namespace phirSOFT.TopologicalComparison
 
         public static void InsertUnique<T>(this IList<T> list, T item, Func<T, T, T> resolveConflicts)
         {
-
+            list.InsertUnique(item, TopologicalComparer<T>.Default, resolveConflicts);
         }
 
         public static void Insert<T>(this IList<T> list, T item, ITopologicalComparer<T> comparer)
@@ -36,10 +36,13 @@ namespace phirSOFT.TopologicalComparison
 
         public static void InsertUnique<T>(this IList<T> list, T item, ITopologicalComparer<T> comparer, Func<T, T, T> resolveConflicts)
         {
-            var index = list.TakeWhile(currentItem =>
-                !comparer.CanCompare(currentItem, item) || comparer.Compare(currentItem, item) <= 0).Count();
+            var result = 0;
+            var index = list.TakeWhile(currentItem => !comparer.TryCompare(currentItem, item, out result) || result <= 0).Count();
 
-            list.Insert(index, item);
+            if (result < 0)
+                list.Insert(index, item);
+            else
+                list[index] = resolveConflicts(list[index], item);
 
             for (var i = index + 2; i < list.Count; i++)
             {
