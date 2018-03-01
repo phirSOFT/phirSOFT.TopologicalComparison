@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
 namespace phirSOFT.TopologicalComparison
 {
@@ -20,8 +19,5 @@ namespace phirSOFT.TopologicalComparison
         {
         }
 
-        public InvalidTreeStateException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
     }
 }
