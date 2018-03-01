@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace phirSOFT.TopologicalComparison
 {
-    public static class TreeProxy
+    public static class TreeExtensions
     {
         public static void Insert<T>(this ITree<T> tree, T node)
         {

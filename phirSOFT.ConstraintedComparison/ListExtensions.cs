@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace phirSOFT.TopologicalComparison
 {
-    public static class ListProxy
+    public static class ListExtensions
     {
         public static void Insert<T>(this IList<T> list, T item)
         {
