@@ -5,10 +5,11 @@ namespace phirSOFT.TopologicalComparison
 {
     /// <inheritdoc />
     /// <summary>
-    ///     Abstracts the concept of an <see cref="T:System.Collections.IComparer" />
-    ///     in a way, that a comparer is allowed to fail to compare two instances.
+    ///     Abstracts the concept of an <see cref="T:System.Collections.Generic.IComparer`1" /> in a way, that a comparer is
+    ///     allowed to fail to compare two instances.
     /// </summary>
-    public interface ITopologicalComparer : IComparer
+    /// <typeparam name="T">The type to compare</typeparam>
+    public interface ITopologicalComparer<in T> : IComparer<T>
     {
         /// <summary>
         ///     Determines wheter <paramref name="x"/> and <paramref name="y"/>
@@ -17,6 +18,6 @@ namespace phirSOFT.TopologicalComparison
         /// <param name="x"> The first operand to compare.</param>
         /// <param name="y"> The second operand to compare.</param>
         /// <returns> True, if the two objects can be compared. </returns>
-        bool CanCompare(object x, object y);
+        bool CanCompare(T x, T y);
     }
 }
