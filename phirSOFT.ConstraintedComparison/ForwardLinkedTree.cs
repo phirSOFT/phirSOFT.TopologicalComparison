@@ -5,17 +5,34 @@ using System.Diagnostics;
 
 namespace phirSOFT.TopologicalComparison
 {
+
+    /// <summary>
+    ///     Implements the <see cref="ITree{T}"/> interface in a tree, where
+    ///     each node knows there children.
+    /// </summary>
     public class ForwardLinkedTree<T> : ITree<T>
     {
+        /// <summary>
+        ///     Creates a new <see cref="ForwardLinkedTree{T}"/> with a default
+        ///     comparer
+        /// </summary>
         public ForwardLinkedTree() : this(default(T))
         {
         }
 
+        /// <summary>
+        ///     Creates a new <see cref="ForwardLinkedTree{T}"/> with a default
+        ///     comparer.
+        /// </summary>
+        /// <param name="rootValue">The value to assign to the root node</param>
         public ForwardLinkedTree(T rootValue)
         {
             Root = new ForwardLinkedTreeNode(rootValue);
         }
 
+        /// <summary>
+        ///     Gets the root node of the tree.
+        /// </summary>
         public ITreeNode<T> Root { get; }
 
         [DebuggerDisplay("Value = {Value}, Children ={_children.Count}")]
