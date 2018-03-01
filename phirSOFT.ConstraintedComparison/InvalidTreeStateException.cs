@@ -14,7 +14,7 @@ namespace phirSOFT.TopologicalComparison
 
         public InvalidTreeStateException(string message) : base(message)
         {
-        ]
+        }
 
         public InvalidTreeStateException(string message, Exception innerException) : base(message, innerException)
         {
