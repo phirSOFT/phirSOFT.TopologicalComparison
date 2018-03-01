@@ -4,13 +4,30 @@ using System.Linq;
 
 namespace phirSOFT.TopologicalComparison
 {
+	/// <summary>
+	///		Provides extension methods to the <see cref="IList{T}"/> interface 
+	///		and <see cref="LinkedList{T}"/> to provide topological ordered insertion.
+	/// </summary>
     public static class CollectionProxy
     {
+		/// <summary>
+		///		Inserts an item in an <see cref="IList{T}"/> preserving the order
+		///		induced by the default topological comparer
+		/// </summary>
+		/// <param name="list">The list to insert into.</param>
+		/// <param name="item">The item to insert.</param>
         public static void Insert<T>(this IList<T> list, T item)
         {
             Insert(list, item, TopologicalComparer<T>.Default);
         }
 
+		/// <summary>
+		///		Interst an item in an <see cref="IList{T}"/> preserving the order
+		///		induced by the <paramref name="comparer"/>.
+		/// </summary>
+		/// <param name="list">The list to insert into.</param>
+		/// <param name="item">The item to insert.</param>
+		/// <param name="comparer">The comparer to use, to determine the insertion position.</param>
         public static void Insert<T>(this IList<T> list, T item, ITopologicalComparer<T> comparer)
         {
             var index = list.TakeWhile(currentItem =>
@@ -28,6 +45,13 @@ namespace phirSOFT.TopologicalComparison
             }
         }
 
+		/// <summary>
+		///		Interst an item in an <see cref="LinkedList{T}"/> preserving the order
+		///		induced by the <paramref name="comparer"/>.
+		/// </summary>
+		/// <param name="list">The list to insert into.</param>
+		/// <param name="item">The item to insert.</param>
+		/// <param name="comparer">The comparer to use, to determine the insertion position.</param>
         public static void Insert<T>(this LinkedList<T> list, T item, ITopologicalComparer<T> comparer)
         {
             var currentItem = list.First;
@@ -51,11 +75,24 @@ namespace phirSOFT.TopologicalComparison
             }
         }
 
+		/// <summary>
+		///		Inserts an item in an <see cref="IList"/> preserving the order
+		///		induced by the default topological comparer
+		/// </summary>
+		/// <param name="list">The list to insert into.</param>
+		/// <param name="item">The item to insert.</param>
         public static void Insert(this IList list, object item)
         {
             Insert(list, item, TopologicalComparer.Default);
         }
 
+		/// <summary>
+		///		Interst an item in an <see cref="IList"/> preserving the order
+		///		induced by the <paramref name="comparer"/>.
+		/// </summary>
+		/// <param name="list">The list to insert into.</param>
+		/// <param name="item">The item to insert.</param>
+		/// <param name="comparer">The comparer to use, to determine the insertion position.</param>
         public static void Insert(this IList list, object item, ITopologicalComparer comparer)
         {
             var index = 0;
