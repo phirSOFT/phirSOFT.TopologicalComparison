@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace phirSOFT.TopologicalComparison
 {
-    public static class CollectionProxy
+    public static class ListProxy
     {
         public static void Insert<T>(this IList<T> list, T item)
         {
@@ -26,6 +26,11 @@ namespace phirSOFT.TopologicalComparison
                 list.RemoveAt(i);
                 list.Insert(index++, x);
             }
+        }
+
+        public static void Insert<T>(this LinkedList<T> list, T item)
+        {
+            return list.Insert(item, TopologicalComparer<T>.Default);
         }
 
         public static void Insert<T>(this LinkedList<T> list, T item, ITopologicalComparer<T> comparer)
