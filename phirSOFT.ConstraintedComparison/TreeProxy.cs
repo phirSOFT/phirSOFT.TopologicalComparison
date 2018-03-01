@@ -3,13 +3,40 @@ using System.Collections.Generic;
 
 namespace phirSOFT.TopologicalComparison
 {
+    /// <summary>
+    ///     Provides extension methods for the <see cref="ITree{T}"/>
+    /// interface.
+    /// </summary>
     public static class TreeProxy
     {
+        /// <summary>
+        ///     Inserts a node into an topological ordered tree. Using the
+        ///     default comparer.
+        /// </summary>
+        /// <param name="tree">
+        ///     The tree to insert the <paramref name="node"/> into.
+        /// </param>
+        /// <param name="node">
+        ///     The node to insert into the tree.
+        /// </param>
         public static void Insert<T>(this ITree<T> tree, T node)
         {
             tree.Insert(node, TopologicalComparer<T>.Default);
         }
 
+        /// <summary>
+        ///     Inserts a node into an topological ordered tree. Using a
+        ///     custom comparer.
+        /// </summary>
+        /// <param name="tree">
+        ///     The tree to insert the <paramref name="node"/> into.
+        /// </param>
+        /// <param name="node">
+        ///     The node to insert into the tree.
+        /// </param>
+        /// <param name="comparer">
+        ///     The comparer to use.
+        /// </param>
         public static void Insert<T>(this ITree<T> tree, T node, ITopologicalComparer<T> comparer)
         {
             var lastParent = tree.Root ?? throw new ArgumentException($"{nameof(tree)} needs a root.");
