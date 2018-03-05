@@ -6,7 +6,7 @@ install:
   - choco install gitversion.portable -pre -y
   - ps: gitversion /l console /output buildserver
 before_build:
-  - nuget restore
+  - dotnet restore
 
 dotnet_csproj:
   patch: true
