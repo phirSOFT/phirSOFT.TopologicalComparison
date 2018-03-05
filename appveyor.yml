@@ -7,6 +7,24 @@ install:
 
 before_build:
   - nuget restore
+  - ps: gitversion /l console /output buildserver
 
-build_script:
-  - ps: gitversion /l console /proj "C:\projects\phirsoft-topologicalcomparison\phirSOFT.TopologicalComparison.sln" /projargs "/m /verbosity:minimal /logger:'C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll' /p:GeneratePackageOnBuild=false"
+build:
+  publish_nuget: true
+  publish_nuget_symbols: true
+  include_nuget_references: true
+  parallel: true
+  verbosity: minimal
+
+deploy:
+- provider: NuGet
+  api_key:
+    secure: lniRR37hIMpfCUlRXhQ1YmLKosIiuaNjAq2GyRcOefpsKtuqum2ZXeUpbeDYLit8
+  on:
+    branch: master
+
+- provider: GitHub
+  auth_token:
+    secure: VqjJ8FyJ7cTc3GyeGVEr1oo/WChSp2+4iEgflkWN3tM6HUc+BdEHK5PNDtD9+7kg
+  on:
+    branch: master
