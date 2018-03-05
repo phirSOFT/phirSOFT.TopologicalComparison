@@ -8,7 +8,8 @@ install:
   - ps: gitversion /l console /output buildserver
 
 on_failure:
-  - ps: 7za a "WorkingTree.7z"
+  - ps: 7z a "WorkingTree.zip"
+  - ps: Push-AppveyorArtifact WorkingTree.zi
   
 dotnet_csproj:
   patch: true
