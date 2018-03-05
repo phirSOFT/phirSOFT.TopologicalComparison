@@ -9,6 +9,15 @@ before_build:
   - nuget restore
   - ps: gitversion /l console /output buildserver
 
+dotnet_csproj:
+  patch: true
+  file: '**\phirSOFT.TopologicalComparison.csproj'
+  version: ${GitVersion_FullSemVer}
+  package_version: ${GitVersion_FullSemVer}
+  assembly_version: ${GitVersion_AssemblySemVer}
+  file_version: ${GitVersion_AssemblySemVer}
+  informational_version: ${GitVersion_FullSemVer}
+  
 build:
   publish_nuget: true
   publish_nuget_symbols: true
