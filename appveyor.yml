@@ -1,0 +1,12 @@
+skip_tags: true
+image: Visual Studio 2017
+configuration: Release
+
+install:
+  - choco install gitversion.portable -pre -y
+
+before_build:
+  - nuget restore
+
+build_script:
+  - ps: gitversion /l console /proj "C:\projects\phirsoft-topologicalcomparison\phirSOFT.TopologicalComparison.sln" 
