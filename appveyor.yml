@@ -14,7 +14,7 @@ on_failure:
 dotnet_csproj:
   patch: true
   file: '**\phirSOFT.TopologicalComparison.csproj'
-  version: $(GitVersion_AssemblySemVer)
+  version: $(GitVersion_FullSemVer)
   package_version: $(GitVersion_FullSemVer)
   assembly_version: $(GitVersion_AssemblySemVer)
   file_version: $(GitVersion_AssemblySemVer)
