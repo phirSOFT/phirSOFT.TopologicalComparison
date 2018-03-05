@@ -4,10 +4,9 @@ configuration: Release
 
 install:
   - choco install gitversion.portable -pre -y
-
+  - ps: gitversion /l console /output buildserver
 before_build:
   - nuget restore
-  - ps: gitversion /l console /output buildserver
 
 dotnet_csproj:
   patch: true
