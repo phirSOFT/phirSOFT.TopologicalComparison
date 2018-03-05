@@ -53,7 +53,7 @@ namespace phirSOFT.TopologicalComparison
         /// <param name="item">The item to insert.</param>
         public static void Insert<T>(this LinkedList<T> list, T item)
         {
-            return list.Insert(item, TopologicalComparer<T>.Default);
+            list.Insert(item, TopologicalComparer<T>.Default);
         }
 
         /// <summary>
