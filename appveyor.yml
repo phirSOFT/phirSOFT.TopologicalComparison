@@ -9,4 +9,4 @@ before_build:
   - nuget restore
 
 build_script:
-  - ps: gitversion /l console /proj "C:\projects\phirsoft-topologicalcomparison\phirSOFT.TopologicalComparison.sln" /projargs '/m /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" /p:GeneratePackageOnBuild=false' 
+  - ps: gitversion /l console /proj "C:\projects\phirsoft-topologicalcomparison\phirSOFT.TopologicalComparison.sln" /projargs "/m /verbosity:minimal /logger:'C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll' /p:GeneratePackageOnBuild=false"
