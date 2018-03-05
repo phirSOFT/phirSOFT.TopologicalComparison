@@ -9,7 +9,7 @@ install:
 
 on_failure:
   - ps: 7z a "WorkingTree.zip"
-  - ps: Push-AppveyorArtifact WorkingTree.zi
+  - ps: Push-AppveyorArtifact WorkingTree.zip
   
 dotnet_csproj:
   patch: true
