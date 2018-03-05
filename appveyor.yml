@@ -10,7 +10,7 @@ install:
 dotnet_csproj:
   patch: true
   file: '**\phirSOFT.TopologicalComparison.csproj'
-  version: ${GitVersion_FullSemVer}
+  version: ${GitVersion_AssemblySemVer}
   package_version: ${GitVersion_FullSemVer}
   assembly_version: ${GitVersion_AssemblySemVer}
   file_version: ${GitVersion_AssemblySemVer}
