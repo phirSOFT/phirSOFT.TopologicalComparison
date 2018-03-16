@@ -47,6 +47,7 @@ deploy:
     secure: VqjJ8FyJ7cTc3GyeGVEr1oo/WChSp2+4iEgflkWN3tM6HUc+BdEHK5PNDtD9+7kg
   on:
     branch: master
-    
-files:
-- appveyor.yml
+
+skip_commits:
+  files:
+  - appveyor.yml
