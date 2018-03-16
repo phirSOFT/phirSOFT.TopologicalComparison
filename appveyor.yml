@@ -4,6 +4,8 @@ configuration: Release
 
 install:
   - cinst gitversion.portable
+  - cinst opencover.portable
+  - cinst install codecov
   - nuget restore
   - ps: gitversion /l console /output buildserver
 
