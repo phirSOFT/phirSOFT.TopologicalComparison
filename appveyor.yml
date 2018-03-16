@@ -1,6 +1,9 @@
 skip_tags: true
 image: Visual Studio 2017
 configuration: Release
+environment:
+  CODECOV_TOKEN:
+    secure: p9Hx0XQTBj4cKDs0EiaZJtbrBEyDWK+pOP89zIQtdtH3OkJDgIeCFA1t2Dufh5FQ
 
 install:
   - cinst gitversion.portable
