@@ -1,3 +1,7 @@
+environment:
+  codecovToken:
+    secure: p9Hx0XQTBj4cKDs0EiaZJtbrBEyDWK+pOP89zIQtdtH3OkJDgIeCFA1t2Dufh5FQ
+
 skip_tags: true
 image: Visual Studio 2017
 configuration: Release
@@ -32,7 +36,7 @@ build:
   
 test_script:
 - nunit-console.exe .\phirSOFT.ConstraintedComparisonTests\bin\Release\phirSOFT.ConstraintedComparisonTests.dll --result=phirSOFT_TopologicalComparisonCoverage.xml
-- codecov -f "phirSOFT_TopologicalComparisonCoverage.xml"
+- codecov -f "phirSOFT_TopologicalComparisonCoverage.xml" -t $(codecovToken)
 
 deploy:
 - provider: NuGet
