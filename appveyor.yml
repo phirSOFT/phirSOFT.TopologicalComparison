@@ -4,8 +4,9 @@ configuration: Release
 
 install:
   - cinst gitversion.portable
-  - cinst opencover.portable
-  - cinst install codecov
+#  - cinst opencover.portable
+  - cinst codecov
+  - cinst nunit-console-runner
   - nuget restore
   - ps: gitversion /l console /output buildserver
 
@@ -28,6 +29,10 @@ build:
   include_nuget_references: true
   parallel: true
   verbosity: minimal
+  
+test_script:
+- nunit-console.exe .\phirSOFT.ConstraintedComparisonTests\bin\Release\phirSOFT.ConstraintedComparisonTests.dll --result=phirSOFT_TopologicalComparisonCoverage.xml
+- codecov -f "phirSOFT_TopologicalComparisonCoverage.xml"
 
 deploy:
 - provider: NuGet
