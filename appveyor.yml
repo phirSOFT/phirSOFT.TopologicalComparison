@@ -48,6 +48,5 @@ deploy:
   on:
     branch: master
     
-    #skip_commits:
-  files:
-    - appveyor.yml
+files:
+- appveyor.yml
