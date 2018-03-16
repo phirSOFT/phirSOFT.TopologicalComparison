@@ -1,4 +1,6 @@
-﻿namespace phirSOFT.TopologicalComparison
+﻿using System;
+
+namespace phirSOFT.TopologicalComparison
 {
     /// <summary>
     ///     Provides extension method for the <see cref="ITopologicalComparer"/> and 
@@ -56,6 +58,13 @@
 
             result = 0;
             return false;
+        }
+
+        public static ITopologicalComparer<TTarget> Map<TSource, TTarget>(this ITopologicalComparer<TSource> comparer,
+            Func<TTarget, TSource> converter)
+        {
+            return TopologicalComparer<TTarget>.Create((x, y) => comparer.Compare(converter(x), converter(y)),
+                (x, y) => comparer.CanCompare(converter(x), converter(y)));
         }
     }
 }
