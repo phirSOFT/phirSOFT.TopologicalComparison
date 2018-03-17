@@ -10,22 +10,51 @@ namespace phirSOFT.TopologicalComparison
     /// </summary>
     public class TypeComparer : ITopologicalComparer<Type>, ITopologicalComparer
     {
+        // Todo: provide a larger, customazible cache.
+        private (Type, Type)? _lastKey;
+        private int _result = 0;
+        private readonly object _locker = new object();
+
         public int Compare(Type x, Type y)
         {
-            // Todo: cache results
-            var infoX = x.GetTypeInfo();
-            var infoY = y.GetTypeInfo();
+            var result = CompareInternal(x, y);
+            if(result == null)
+                throw new InvalidOperationException();
 
-            return (infoY.IsAssignableFrom(infoX) ? 1 : 0) - (infoX.IsAssignableFrom(infoY) ? 1 : 0);
+            return result.Value;
         }
 
         public bool CanCompare(Type x, Type y)
         {
-            // Todo: cache results
+            return CompareInternal(x,y) != null;
+        }
+
+        private int? CompareInternal(Type x, Type y)
+        {
+            lock (_locker)
+            {
+                if (_lastKey.HasValue && _lastKey.Value.Item1 == x && _lastKey.Value.Item2 == y)
+                    return _result;
+            }
+
             var infoX = x.GetTypeInfo();
             var infoY = y.GetTypeInfo();
 
-            return infoY.IsAssignableFrom(infoX) || infoX.IsAssignableFrom(infoY);
+
+            var ySuperX = infoY.IsAssignableFrom(infoX);
+            var xSuperY = infoX.IsAssignableFrom(infoY);
+
+            if (!ySuperX && !xSuperY)
+            {
+                return null;
+            }
+
+            lock (_locker)
+            {
+                _lastKey = (x, y);
+                _result = (ySuperX ? 1 : 0) - (xSuperY ? 1 : 0);
+                return _result;
+            }
         }
 
         public int Compare(object x, object y)
