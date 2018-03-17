@@ -1,14 +1,16 @@
-﻿namespace phirSOFT.TopologicalComparison
+﻿using System;
+
+namespace phirSOFT.TopologicalComparison
 {
     /// <summary>
     ///     Provides extension method for the <see cref="ITopologicalComparer"/> and 
     ///     <see cref="ITopologicalComparer{T}"/> interfaces.
     /// </summary>
-    public static class TopologicalComparerProxy
+    public static class TopologicalComparerExtensions
     {
         /// <summary>
         ///     Tries to compare two objects using an <see
-        ///     cref="ITopologicalComparer/">.
+        ///     cref="ITopologicalComparer"/>.
         /// </summary>
         /// <param name="comparer"> The comparer to use.</param>
         /// <param name="lhs">The first object to compare.</param>
@@ -56,6 +58,13 @@
 
             result = 0;
             return false;
+        }
+
+        public static ITopologicalComparer<TTarget> Map<TSource, TTarget>(this ITopologicalComparer<TSource> comparer,
+            Func<TTarget, TSource> converter)
+        {
+            return TopologicalComparer<TTarget>.Create((x, y) => comparer.Compare(converter(x), converter(y)),
+                (x, y) => comparer.CanCompare(converter(x), converter(y)));
         }
     }
 }

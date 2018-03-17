@@ -1,7 +1,7 @@
 ﻿namespace phirSOFT.TopologicalComparison
 {
     /// <summary>
-    ///     Provides an tree data structure
+    ///     Provides a tree data structure
     /// </summary>
     public interface ITree<T>
     {

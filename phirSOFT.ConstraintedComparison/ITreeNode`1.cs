@@ -22,13 +22,13 @@ namespace phirSOFT.TopologicalComparison
         ///     Adds a child to this node.
         /// </summary>
         /// <param name="node">The value of the node to attach</param>
-        /// <returns>The new added <see cref="ITreeNode{T}"/>.<returns>
+        /// <returns>The new added <see cref="ITreeNode{T}"/>.</returns>
         ITreeNode<T> AddChild(T node);
 
         /// <summary>
         ///     Detaches an <see cref="ITreeNode{T}"/> from this node.
         /// </summary>
-        /// <param name="child"/> The node to detach </param>
+        /// <param name="child"> The node to detach </param>
         /// <remarks>
         ///     The child node has to be an direct child of this node.
         /// </remarks>
