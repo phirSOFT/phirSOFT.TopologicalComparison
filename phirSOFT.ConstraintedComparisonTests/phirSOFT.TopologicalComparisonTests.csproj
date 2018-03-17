@@ -55,6 +55,7 @@
     <Compile Include="TreeComparer.cs" />
     <Compile Include="TreeComparerTest.cs" />
     <Compile Include="TreeTest.cs" />
+    <Compile Include="TypeComparerUnitTest.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
