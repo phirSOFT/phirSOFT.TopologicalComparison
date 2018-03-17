@@ -14,7 +14,7 @@ namespace phirSOFT.TopologicalComparison
         {
             // Todo: cache results
             var infoX = x.GetTypeInfo();
-            var infoY = x.GetTypeInfo();
+            var infoY = y.GetTypeInfo();
 
             return (infoY.IsAssignableFrom(infoX) ? 1 : 0) - (infoX.IsAssignableFrom(infoY) ? 1 : 0);
         }
@@ -23,7 +23,7 @@ namespace phirSOFT.TopologicalComparison
         {
             // Todo: cache results
             var infoX = x.GetTypeInfo();
-            var infoY = x.GetTypeInfo();
+            var infoY = y.GetTypeInfo();
 
             return infoY.IsAssignableFrom(infoX) || infoX.IsAssignableFrom(infoY);
         }
