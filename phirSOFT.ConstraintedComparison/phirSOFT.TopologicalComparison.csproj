@@ -1,19 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		
-		<TargetFramework>netstandard1.0</TargetFramework>
+    <TargetFramework>netstandard1.0</TargetFramework>
 		<Description>Interfaces for topologic sortable types.</Description>
 		<IncludeBuildOutput>true</IncludeBuildOutput>
 		<IncludeSymbols>true</IncludeSymbols>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>0.0.1</Version>
-		<AssemblyVersion>0.0.0.1</AssemblyVersion>
-		<FileVersion>0.0.0.1</FileVersion>
-	</PropertyGroup>
+  </PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="System.ValueTuple" Version="4.3.0" />
+	  <PackageReference Include="GitVersion.MsBuild" Version="5.10.3">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	  <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	  <PackageReference Include="System.ValueTuple" Version="4.5.0" />
 	</ItemGroup>
 
 </Project>
