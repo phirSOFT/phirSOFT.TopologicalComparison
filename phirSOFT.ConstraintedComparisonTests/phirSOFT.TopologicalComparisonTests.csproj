@@ -2,9 +2,8 @@
 
   <PropertyGroup>
     <TargetFrameworks>net6.0;net48</TargetFrameworks>
-    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-
+    <LangVersion>8.0</LangVersion>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -13,6 +12,10 @@
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.8" />
     <PackageReference Include="MSTest.TestFramework" Version="2.2.8" />
     <PackageReference Include="coverlet.collector" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\phirSOFT.ConstraintedComparison\phirSOFT.TopologicalComparison.csproj" />
   </ItemGroup>
 
 </Project>
