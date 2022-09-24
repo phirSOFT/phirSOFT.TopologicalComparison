@@ -72,7 +72,7 @@ namespace phirSOFT.TopologicalComparison
                 currentItem = currentItem.Next;
 
 
-            var inserted = currentItem != null ? list.AddAfter(currentItem, item) : list.AddLast(item);
+            var inserted = currentItem != null ? list.AddBefore(currentItem, item) : list.AddLast(item);
 
             for (currentItem = inserted.Next; currentItem != null; currentItem = currentItem?.Next)
             {
