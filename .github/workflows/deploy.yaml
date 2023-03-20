@@ -16,10 +16,10 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0.404
-        env:
-          NUGET_AUTH_TOKEN: ${{secrets.NUGETTOKEN}}
       - run: dotnet build --configuration Release
       - name: Create the package
         run: dotnet pack --configuration Release
       - name: Publish the package to GPR
         run: dotnet nuget push phirSOFT.ConstraintedComparison/bin/Release/*.nupkg
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.NUGETTOKEN}}
