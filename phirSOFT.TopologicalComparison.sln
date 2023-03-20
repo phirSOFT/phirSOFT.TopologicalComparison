@@ -1,11 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "phirSOFT.TopologicalComparison", "phirSOFT.ConstraintedComparison\phirSOFT.TopologicalComparison.csproj", "{0592850C-D82E-4F4D-BEAF-3F723A7713C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "phirSOFT.TopologicalComparison", "phirSOFT.ConstraintedComparison\phirSOFT.TopologicalComparison.csproj", "{0592850C-D82E-4F4D-BEAF-3F723A7713C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "phirSOFT.TopologicalComparisonTests", "phirSOFT.ConstraintedComparisonTests\phirSOFT.TopologicalComparisonTests.csproj", "{F5366B0E-8248-4CC0-9BA0-F7F7D3309657}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "phirSOFT.TopologicalComparisonTests", "phirSOFT.ConstraintedComparisonTests\phirSOFT.TopologicalComparisonTests.csproj", "{F5366B0E-8248-4CC0-9BA0-F7F7D3309657}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{A92CF183-75A6-40A7-A116-7CF1E6B608DF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{1CA61677-A8AE-4C75-A963-CD5217F8AAEC}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yaml = .github\workflows\build.yaml
+		.github\workflows\deploy.yaml = .github\workflows\deploy.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +32,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1CA61677-A8AE-4C75-A963-CD5217F8AAEC} = {A92CF183-75A6-40A7-A116-7CF1E6B608DF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F019D9A6-FC83-4A57-95C5-1CAB42155231}
