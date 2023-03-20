@@ -6,7 +6,6 @@
     <AssemblyTitle>phirSOFT.ConstraintedComparisonTests</AssemblyTitle>
     <Product>phirSOFT.ConstraintedComparisonTests</Product>
     <Copyright>Copyright ©  2017</Copyright>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="GitVersion.MsBuild" Version="5.12.0">

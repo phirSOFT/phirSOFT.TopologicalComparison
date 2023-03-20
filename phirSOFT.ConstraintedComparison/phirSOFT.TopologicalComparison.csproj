@@ -1,8 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		
-		<TargetFramework>netstandard1.0</TargetFramework>
+    <TargetFramework>netstandard1.0</TargetFramework>
 		<Description>Interfaces for topologic sortable types.</Description>
 		<IncludeBuildOutput>true</IncludeBuildOutput>
 		<IncludeSymbols>true</IncludeSymbols>
@@ -19,7 +18,7 @@
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
-	  <PackageReference Include="System.ValueTuple" Version="4.3.0" />
+	  <PackageReference Include="System.ValueTuple" Version="4.5.0" />
 	</ItemGroup>
 
 </Project>
